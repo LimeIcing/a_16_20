@@ -14,29 +14,27 @@ public class LinkedIntList20 {
      */
 
     public void shift() {
-        int[] odds = new int[this.size() / 2];
-        int[] even = new int[this.size() / 2];
-        ListNode20 current = front;
+        ListNode20 previous = front;
+        ListNode20 current = front.next;
+        ListNode20 last = null;
+        int size = this.size();
         int counter = 0;
 
-        while (current != null) {
-            if (counter % 2 == 0) {
-                even[counter / 2] = current.data;
-            } else {
-                odds[counter / 2] = current.data;
-            }
+        if (size % 2 == 0) {
+            size--;
+            last = this.nodeAt(size);
+        }
 
-            counter++;
+        nodeAt(size - 1).next = front.next;
+
+        while (counter < size) {
+            previous.next = current.next;
             current = current.next;
+            counter++;
         }
 
-        front = new ListNode20(even[0]);
-
-        for (int i = 1; i < even.length; i++) {
-            this.add(even[i]);
-        }
-        for (int i = 0; i < odds.length; i++) {
-            this.add(odds[i]);
+        if (last != null) {
+            current.next = last;
         }
     }
 
