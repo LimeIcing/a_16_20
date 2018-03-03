@@ -16,6 +16,7 @@ public class LinkedIntList20 {
     public void shift() {
         ListNode20 previous = front;
         ListNode20 current = front.next;
+        ListNode20 firstOdd = front.next;
         ListNode20 last = null;
         int size = this.size();
         int counter = 0;
@@ -27,15 +28,18 @@ public class LinkedIntList20 {
 
         nodeAt(size - 1).next = front.next;
 
-        while (counter < size) {
+        while (counter < size -2) {
             previous.next = current.next;
+            previous = current;
             current = current.next;
             counter++;
+            System.out.println(this);
         }
 
+        /*
         if (last != null) {
             current.next = last;
-        }
+        }*/
     }
 
     // Everything below is copied from the book
